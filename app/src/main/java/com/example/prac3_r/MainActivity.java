@@ -1,9 +1,13 @@
 package com.example.prac3_r;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,5 +25,11 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container_view, logInFragment)
                     .commit();
         }
+    }
+
+    public void replaceFragments(Fragment inst) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_view, inst).commit();
     }
 }

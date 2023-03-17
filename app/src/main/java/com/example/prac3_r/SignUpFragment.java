@@ -25,16 +25,32 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        signUp = view.findViewById(R.id.buttonSignUp);
-        fieldName = view.findViewById(R.id.editTextName);
-        fieldEmail = view.findViewById(R.id.editTextEmail);
-        fieldPassword = view.findViewById(R.id.editTextPassword);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+        signUp = view.findViewById(R.id.continue_reg);
+        fieldName = view.findViewById(R.id.editTextName);
+        fieldEmail = view.findViewById(R.id.editTextEmail);
+        fieldPassword = view.findViewById(R.id.editTextPassword);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle result = new Bundle();
+                result.putString("name", fieldName.getText().toString());
+                result.putString("email", fieldEmail.getText().toString());
+                result.putString("password", fieldPassword.getText().toString());
+                getParentFragmentManager().setFragmentResult("fromSignUp", result);
+
+                LogInFragment inst = new LogInFragment();
+                ((MainActivity)getActivity()).replaceFragments(inst);
+            }
+        });
+
         return view;
     }
 }
